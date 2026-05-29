@@ -2,32 +2,48 @@
 
 [English](README_en.md) | 中文
 
-我的 AI Agent Skills 合集，适用于 Claude Code 等支持 [Agent Skills 规范](https://agentskills.io/specification) 的工具。
+我的 AI Agent Skills 合集。
 
-## 安装
+## Agent 接入
 
-将 skill 目录复制到 `~/.claude/skills/` 即可：
+Agent 可以通过读取 [`skills.json`](skills.json) 快速发现所有可用 skill，无需遍历仓库。
+
+```
+https://raw.githubusercontent.com/Momoyeyu/skills/master/skills.json
+```
+
+### 查询可用 skills
 
 ```bash
-# 从仓库安装
-git clone https://github.com/Momoyeyu/skills.git
-cp -r skills/gen-images ~/.claude/skills/
-cp -r skills/tdd ~/.claude/skills/
+curl -s https://raw.githubusercontent.com/Momoyeyu/skills/master/skills.json | python3 -c "
+import json, sys
+for s in json.load(sys.stdin)['skills']:
+    print(f\"{s['invoke']}  {s['description']}\")
+"
+```
 
-# 或从 .skill 文件安装（ZIP 格式）
-unzip gen-images.skill -d ~/.claude/skills/
+### 安装单个 skill
+
+```bash
+git clone --depth 1 https://github.com/Momoyeyu/skills.git /tmp/_skills
+cp -r /tmp/_skills/<skill-name> ~/.claude/skills/
+rm -rf /tmp/_skills
 ```
 
 ## Skills 列表
 
-| 名称 | 说明 | 调用方式 |
-|------|------|----------|
-| [gen-images](gen-images/) | 通过 OpenRouter 调用 AI 图像模型生成配图，支持多模型并行、人工挑选 | `/gen-images` |
-| [tdd](tdd/) | 测试驱动开发流程指导 | `/tdd` |
+| 调用 | 说明 | 依赖 |
+|------|------|------|
+| `/gen-images` | 通过 OpenAI 兼容 API 生成配图，支持多模型并行 | Python 3, pyyaml |
+| `/tdd` | 测试驱动开发流程 | 无 |
 
-## 依赖
+## 手动安装（全部）
 
-- **gen-images**: 需要 Python 3、pyyaml、[OpenRouter](https://openrouter.ai/) API Key
+```bash
+git clone https://github.com/Momoyeyu/skills.git /tmp/_skills
+cp -r /tmp/_skills/gen-images /tmp/_skills/tdd ~/.claude/skills/
+rm -rf /tmp/_skills
+```
 
 ## 许可
 

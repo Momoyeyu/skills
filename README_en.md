@@ -2,32 +2,48 @@
 
 English | [中文](README.md)
 
-My personal AI Agent Skills collection, compatible with Claude Code and other tools that support the [Agent Skills specification](https://agentskills.io/specification).
+My AI Agent Skills collection.
 
-## Installation
+## Agent Access
 
-Copy the skill directory to `~/.claude/skills/`:
+Agents can read [`skills.json`](skills.json) to discover all available skills without traversing the repo.
+
+```
+https://raw.githubusercontent.com/Momoyeyu/skills/master/skills.json
+```
+
+### Query available skills
 
 ```bash
-# Install from repo
-git clone https://github.com/Momoyeyu/skills.git
-cp -r skills/gen-images ~/.claude/skills/
-cp -r skills/tdd ~/.claude/skills/
+curl -s https://raw.githubusercontent.com/Momoyeyu/skills/master/skills.json | python3 -c "
+import json, sys
+for s in json.load(sys.stdin)['skills']:
+    print(f\"{s['invoke']}  {s['description']}\")
+"
+```
 
-# Or install from .skill file (ZIP format)
-unzip gen-images.skill -d ~/.claude/skills/
+### Install a single skill
+
+```bash
+git clone --depth 1 https://github.com/Momoyeyu/skills.git /tmp/_skills
+cp -r /tmp/_skills/<skill-name> ~/.claude/skills/
+rm -rf /tmp/_skills
 ```
 
 ## Skills
 
-| Name | Description | Invoke |
-|------|-------------|--------|
-| [gen-images](gen-images/) | Generate blog images via OpenRouter AI models, with multi-model parallel generation and manual selection | `/gen-images` |
-| [tdd](tdd/) | Test-Driven Development workflow guide | `/tdd` |
+| Invoke | Description | Dependencies |
+|--------|-------------|--------------|
+| `/gen-images` | Generate images via OpenAI-compatible APIs, multi-model parallel | Python 3, pyyaml |
+| `/tdd` | Test-Driven Development workflow | None |
 
-## Dependencies
+## Manual Install (all)
 
-- **gen-images**: Requires Python 3, pyyaml, [OpenRouter](https://openrouter.ai/) API Key
+```bash
+git clone https://github.com/Momoyeyu/skills.git /tmp/_skills
+cp -r /tmp/_skills/gen-images /tmp/_skills/tdd ~/.claude/skills/
+rm -rf /tmp/_skills
+```
 
 ## License
 
