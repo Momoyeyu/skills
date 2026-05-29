@@ -1,0 +1,17 @@
+# Blog image generation config
+# Place this file at: scripts/images.yaml (in your project root)
+# Then run: python3 ~/.claude/skills/gen-images/scripts/gen-images.py
+
+models:
+  - id: google/gemini-3-pro-image-preview   # Nano Banana Pro
+    label: banana-pro
+  - id: openai/gpt-5.4-image-2              # GPT-5.4 Image 2
+    label: gpt-image-2
+
+images:
+  - name: example-diagram                    # output filename prefix
+    output_dir: public/img/posts/my-post     # output directory (relative to project root)
+    prompt: |
+      Generate a beautifully illustrated diagram...
+      All text in Simplified Chinese.
+      Landscape orientation, 16:9 aspect ratio, high resolution.
