@@ -62,14 +62,20 @@ Run `claude --version`. If >= 2.1.154, ask the user to pick Option A or B
 
 Create the config dir `~/.config/claude-deepseek/` and:
 
-- Copy `assets/proxy.py` there.
+- Copy `assets/proxy.py` and `assets/claude-ds.zsh` there **verbatim — do not read
+  their contents into your context; you don't need to understand them to install
+  them.** Just copy the files. (If the skill's `assets/` are not on disk — e.g.
+  you only have SKILL.md — fetch them raw instead, no need to print them:
+  `curl -fsSLO` from
+  `https://raw.githubusercontent.com/Momoyeyu/skills/master/deepseek-claude-code-setup/assets/{proxy.py,claude-ds.zsh}`.)
 - Copy `assets/key.env` there, then have the user fill their key. `chmod 600` it.
-- Install the launcher functions from `assets/claude-ds.zsh`: copy it into the
-  config dir and add ONE line to the user's shell rc (`~/.zshrc` / `~/.bashrc`):
+- Wire up the launcher: add ONE line to the user's shell rc (`~/.zshrc` / `~/.bashrc`):
   ```
   [ -f ~/.config/claude-deepseek/claude-ds.zsh ] && source ~/.config/claude-deepseek/claude-ds.zsh
   ```
-  Keep the rc clean — one source line, not the whole function body.
+  Keep the rc clean — one source line, not the whole function body. (The proxy
+  defaults to port 8787; if that port is taken, set `DS_PROXY_PORT` to another
+  value — otherwise the launcher's "already running?" check misfires on it.)
 
 For non-zsh/bash shells, Windows, the env-var meanings, model choices, and the
 `settings.json` "make `claude` default to DeepSeek" variant, see
