@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Blog image generator via OpenAI-compatible APIs. Config: scripts/images.yaml"""
+"""Blog image generator via OpenAI-compatible APIs. Usage: gen-images.py <config.yaml> [--force]"""
 
 import os, sys, json, base64, re, urllib.request, urllib.error, concurrent.futures
 
@@ -62,7 +62,9 @@ def main():
     import yaml
     force = "--force" in sys.argv
     args = [a for a in sys.argv[1:] if a != "--force"]
-    cfg_path = args[0] if args else os.path.join(os.getcwd(), "scripts", "images.yaml")
+    if not args:
+        print(f"Usage: {sys.argv[0]} <config.yaml> [--force]"); sys.exit(1)
+    cfg_path = args[0]
     if not os.path.exists(cfg_path):
         print(f"[ERROR] {cfg_path} not found"); sys.exit(1)
     with open(cfg_path) as f:

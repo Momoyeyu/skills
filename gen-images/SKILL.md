@@ -9,7 +9,7 @@ description: Use when the user wants to generate images for blog posts or docume
 
 ## 前置检查
 
-1. 检查 `scripts/images.yaml` 是否存在，不存在则帮用户创建（参考 `${CLAUDE_SKILL_DIR}/templates/images.yaml.example`）
+1. 询问用户 YAML 配置文件路径，检查是否存在，不存在则帮用户创建（参考 `${CLAUDE_SKILL_DIR}/templates/images.yaml.example`）
 2. 检查 YAML 中 `api_key` 引用的环境变量是否已设置
 
 ## YAML 配置
@@ -34,8 +34,8 @@ images:
 ## 生成
 
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/scripts/gen-images.py           # 默认读 scripts/images.yaml
-python3 ${CLAUDE_SKILL_DIR}/scripts/gen-images.py --force    # 强制重新生成
+python3 ${CLAUDE_SKILL_DIR}/scripts/gen-images.py <config.yaml>            # 生成图片
+python3 ${CLAUDE_SKILL_DIR}/scripts/gen-images.py <config.yaml> --force    # 强制重新生成
 ```
 
 ## 选图与清理（多模型时必做）
