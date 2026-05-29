@@ -36,12 +36,13 @@ rm -rf /tmp/_skills
 |--------|-------------|--------------|
 | `/gen-images` | Generate images via OpenAI-compatible APIs, multi-model parallel | Python 3, pyyaml |
 | `/tdd` | Test-Driven Development workflow | None |
+| `/deepseek-claude-code-setup` | Point Claude Code at DeepSeek (incl. fixing the 2.1.154+ 400 `system` error) | Python 3 |
 
 ## Manual Install (all)
 
 ```bash
 git clone https://github.com/Momoyeyu/skills.git /tmp/_skills
-cp -r /tmp/_skills/gen-images /tmp/_skills/tdd ~/.claude/skills/
+cp -r /tmp/_skills/gen-images /tmp/_skills/tdd /tmp/_skills/deepseek-claude-code-setup ~/.claude/skills/
 rm -rf /tmp/_skills
 ```
 

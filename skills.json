@@ -26,6 +26,23 @@
         "SKILL.md",
         "testing-anti-patterns.md"
       ]
+    },
+    {
+      "name": "deepseek-claude-code-setup",
+      "description": "Configure Claude Code to use DeepSeek models (deepseek-v4-pro/flash) via the Anthropic-compatible API, with a local proxy that fixes the 400 'role unknown variant system' error on Claude Code 2.1.154+. Adds a claude-ds launcher and leaves the default claude on Anthropic.",
+      "path": "deepseek-claude-code-setup",
+      "invoke": "/deepseek-claude-code-setup",
+      "triggers": ["deepseek claude code", "deepseek 接入 claude code", "claude code 用 deepseek", "deepseek-v4", "unknown variant system 400"],
+      "dependencies": ["python3"],
+      "files": [
+        "SKILL.md",
+        "references/fix-400-system-bug.md",
+        "references/install-claude-code.md",
+        "references/configuration.md",
+        "assets/proxy.py",
+        "assets/claude-ds.zsh",
+        "assets/key.env"
+      ]
     }
   ]
 }
